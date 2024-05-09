@@ -1,0 +1,31 @@
+<div class="layout-px-spacing">
+  <div class="row mt-5">
+    <div class="col-lg-4 offset-lg-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h4 class="text-center">Add Blogs</h4>
+          <hr>
+          <form>
+            <div class="form-group">
+              <label class="form-control-label">Enter Blog</label>
+              <textarea class="form-control" [(ngModel)]="blogs" [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+
+              <div class="btn-onoff mt-4 ">
+                <span style="padding-right: 10px;">Status</span>
+                <button type="button"
+                        aria-pressed="true" autocomplete="off"
+                        class="btn btn-toggle" ngClass="{{statusValue == 1 ? 'active' : ''}}"
+                        (click)="statusChange(statusValue)">
+                    <div class="handle"></div>
+                </button>
+            </div>
+
+            <hr>
+            <button type="button" class="btn btn-primary btn-block" [disabled]="!blogs" (click)="saveBlog()">{{isEdit? 'Update':'Save'}}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

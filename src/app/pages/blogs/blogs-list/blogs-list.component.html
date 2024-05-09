@@ -1,0 +1,50 @@
+<div class="layout-px-spacing">
+  <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="widget">
+              <h2 style="text-align: center;">My Blogs List</h2>
+              <div class="d-flex justify-content-end mb-3">
+                  <div class="">
+                      <a class="btn btn-primary mt-2 btn-sm" routerLink="/blog/add">Add Blogs</a>
+                  </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-hover " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Blogs</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                      <ng-container *ngIf="blogsList?.length != 0">
+                        <tr *ngFor="let list of blogsList ; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{list?.blogs}}</td>
+                            <td [ngStyle]="{color: list?.status=== 'Active'? 'green':'red'}">{{list?.status}}</td>
+                            <td><button class="btn userlistbtn mr-3" routerLink="/blog/add/{{list.id}}">
+                              <i class="fas fa-edit"></i>
+                          </button></td>
+                        </tr>
+                      </ng-container>
+                        <tr *ngIf="blogsList?.length == 0 || blogsList == null ">
+                          <td colspan="100%" style="text-align: center; font-weight: 500;font-size: medium;">No Record Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <ngb-pagination [collectionSize]="blogsList.length" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="getPremiumData();"></ngb-pagination> -->
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
