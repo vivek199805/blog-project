@@ -1,26 +1,27 @@
-<section id="home">
-  <div class="container p-5">
-    <p class="lead">
-      <b>Blogs List</b>
-    </p>
-    <div class="row">
-      <div *ngIf="!blogData" class="m-auto">
-        <h1 class="text-center display-3 mt-5">
-          <i class="fa fa-spinner fa-spin"></i>
-        </h1>
-      </div>
-      <div *ngFor="let item of blogData" class="col-md-3 mb-5">
-        <div class="card">
-          <div class="card-body">
-            <!-- <h5 class="card-title"></h5> -->
-            <p>{{ item.blogs }}</p>
+<div class="layout-px-spacing">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="widget">
+        <p class="lead"><b>Blogs List</b></p>
+
+        <div *ngIf="!blogData" class="m-auto">
+          <h1 class="text-center display-3 mt-5">
+            <i class="fa fa-spinner fa-spin"></i>
+          </h1>
+        </div>
+        <div class="row p-4">
+          <div *ngFor="let item of blogData" class="col-md-3 mb-5">
+
+            <div class="card">
+              <div class="card-body">
+                <!-- <h5 class="card-title"></h5> -->
+                <p>{{ item.blogs }}</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-
-
-
+</div>

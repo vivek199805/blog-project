@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: lightblue;">
   <div class="container-fluid">
-    <a  class="navbar-brand" routerLink="/home"> Home</a>
+    <a  class="navbar-brand" routerLink="/"> Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,13 +13,14 @@
         <a *ngIf="!token"  routerLink="/login" class="nav-link">
           <i class="fa fa-key" aria-hidden="true"></i> Login
         </a>
-        <a *ngIf="!token"  routerLink="/register" class="nav-link">
+        <!-- <a *ngIf="!token"  routerLink="/register" class="nav-link">
           <i class="fa fa-key" aria-hidden="true"></i> Register
-        </a>
+        </a> -->
         <a *ngIf="token" class="nav-link" (click)="logout()">
           <i class="fas fa-sign-out-alt"></i> LogOut
         </a>
       </div>
+
     </div>
   </div>
 </nav>

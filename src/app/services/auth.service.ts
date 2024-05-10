@@ -13,20 +13,18 @@ export class AuthService {
     private router:Router
   ) { }
 
-  baseURL: string = 'https://ng-course-recipe-book-712d4-default-rtdb.firebaseio.com/'
-
   getHeaders():any {
     const token = JSON.parse(localStorage.getItem('userData')!);
     return token ? new HttpParams().set('auth', token.idToken) : null;
   }
 
   postdata(payload: any, path: any): Observable<any> {
-    return this.http.post<any>(this.baseURL + path, payload, {params:this.getHeaders()})
+    return this.http.post<any>(environment.baseURL + path, payload, {params:this.getHeaders()})
       .pipe(retry(0), catchError(this.errorHandl));
   }
 
   getdata(path: any): Observable<any> {
-    return this.http.get<any>(this.baseURL + path, { params: this.getHeaders() }).pipe(retry(0), catchError(this.errorHandl));
+    return this.http.get<any>(environment.baseURL + path).pipe(retry(0), catchError(this.errorHandl));
   }
 
   errorHandl(error: any) {
@@ -38,6 +36,8 @@ export class AuthService {
     } else {
       // Get server-side error
       // errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.log(error);
+
       switch(error.error.error.message){
         case 'EMAIL_EXISTS':
         errorMessage = "The email exists already";
@@ -48,34 +48,36 @@ export class AuthService {
         case 'INVALID_PASSWORD':
             errorMessage = "The password is invalid";
            break;
+           case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+            errorMessage = " Access to this account has been temporarily disabled due to many failed login attempts.";
+           break;
       }
-      errorMessage = error.error.error.message;
     }
     return throwError(errorMessage);
   }
 
   signUp(payload: any): Observable<any> {
-    return this.http.post<any>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBpfhzxNS8HEbox7ZtMvgs_kmc0YPXPrAE', payload)
+    return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApikey}`, payload)
     .pipe(retry(0), catchError(this.errorHandl));
   }
 
   login(payload: any): Observable<any> {
-    return this.http.post<any>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBpfhzxNS8HEbox7ZtMvgs_kmc0YPXPrAE', payload)
+    return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApikey}`, payload)
     .pipe(retry(0), catchError(this.errorHandl));
   }
 
   logout(){
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   getBlogById(id:string|undefined, path:any):Observable<any>{
-    let url = `${this.baseURL}${path}/${id}/.json`;
+    let url = `${environment.baseURL}${path}/${id}/.json`;
     return this.http.get<any>(url,{ params: this.getHeaders() }).pipe(retry(0), catchError(this.errorHandl));
   }
 
   update(id:string|undefined, path:any, payload:any):Observable<any>{
-    let url = `${this.baseURL}${path}/${id}/.json`;
+    let url = `${environment.baseURL}${path}/${id}/.json`;
     return this.http.put<any>(url, payload, { params: this.getHeaders() }).pipe(retry(0), catchError(this.errorHandl));
   }
 

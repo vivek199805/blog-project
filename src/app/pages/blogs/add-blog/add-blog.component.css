@@ -1,71 +1,11 @@
-.btn-onoff .btn {
-  background-color: #dcdcdc;
-}
 
-.btn-onoff .btn-toggle {
-  padding: 0;
-  position: relative;
-  border: none;
-  height: 1.5rem;
-  width: 3rem;
-  border-radius: 1.5rem;
-  color: #6b7381;
-  background: #bdc1c8;
-}
-
-.btn-onoff .btn-toggle:before,
-.btn-onoff .btn-toggle:after {
-  line-height: 1.5rem;
-  width: 4rem;
+.card {
+  background-color: white;
+  width: 50%;
   text-align: center;
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: absolute;
-  bottom: 0;
-  transition: opacity 0.25s;
-}
-
-.btn-onoff .btn-toggle:before {
-  content: "";
-  left: -4rem;
-}
-
-.btn-onoff .btn-toggle:before,
-.btn-toggle:after {
-  color: #6b7381;
-}
-
-.btn-onoff .btn-toggle>.handle {
-  position: absolute;
-  top: 0.1875rem;
-  left: 0.1875rem;
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 1.125rem;
-  background: #fff;
-  transition: left 0.25s;
-}
-
-.btn-onoff .btn-toggle.active>.handle {
-  left: 1.6875rem;
-  transition: left 0.25s;
-}
-
-.btn-onoff .btn-toggle:after {
-  content: "";
-  right: -4rem;
-  opacity: 0.5;
-}
-
-.btn-onoff .btn-toggle:before,
-.btn-toggle:after {
-  color: #6b7381;
-}
-
-.btn-onoff .btn-toggle.active {
-  background-color: #00659E;
-  transition: background-color 0.25s;
-  transform: none;
+  min-height: 50%;
+  box-shadow: 0px 0px 30px #00000029;
+  border-radius: 30px;
+  padding: 20px;
+  margin: auto;
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
+import { NgxToastrService } from 'src/app/services/ngx-toastr.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -19,7 +21,8 @@ export class AddBlogComponent implements OnInit {
     private router: Router,
     private data: DataService,
     private authService:AuthService,
-    private activateroute:ActivatedRoute
+    private activateroute:ActivatedRoute,
+    private toaster:NgxToastrService
   ) {
 
   }
@@ -57,19 +60,19 @@ getBlogData(){
         status: this.statusValue,
         user:  this.data.userData.email
       }
+      let blogObs:Observable<any>
       if(this.isEdit){
-        this.authService.update(this.editID,'blogs', data).subscribe((res: any) => {
-          if(res){
-            this.router.navigate(['blog/list'])
-          }
-        });
+        blogObs = this.authService.update(this.editID,'blogs', data);
       }else{
-        this.authService.postdata(data, 'blogs.json').subscribe((res: any) => {
-          if(res){
-            this.router.navigate(['blog/list'])
-          }
-        });
+        blogObs = this.authService.postdata(data, 'blogs.json')
       }
+
+      blogObs.subscribe((res: any) => {
+        if(res){
+          this.toaster.showSuccess( this.isEdit ? 'Blog Updated Successfully':'Blog Created Successfully','Succcess')
+          this.router.navigate(['blog/list'])
+        }
+      });
     }
   }
 

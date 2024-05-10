@@ -5,17 +5,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+	{ path: 'home', component: HomeComponent, },
 
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
 },
-  {
-    path: 'home', component: HomeComponent},
-  {
-    path: 'register',component: RegistrationComponent
-  },
+  // {
+  //   path: 'register',component: RegistrationComponent
+  // },
 {
   path: 'profile',
   loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule)
