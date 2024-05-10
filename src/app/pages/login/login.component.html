@@ -65,7 +65,7 @@
                                 <div class="form-row mt-4">
                                   <div class="form-group col-lg-12">
                                       <label for="pass" class="p-2">Password.</label>
-                                      <input type="password" name="password" class="form-control" 	formControlName="password">
+                                      <input type="password" name="password" class="form-control" 	formControlName="password" minlength="7">
                                       <div *ngIf="f.password.touched && f.password.invalid" class="alert-error">
                                         <div *ngIf="loginForm.controls['password'].errors?.required">
                                             <small><b>Password is required.</b></small>

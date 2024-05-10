@@ -51,6 +51,9 @@ export class AuthService {
            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
             errorMessage = " Access to this account has been temporarily disabled due to many failed login attempts.";
            break;
+           case 'INVALID_LOGIN_CREDENTIALS':
+            errorMessage = "Enter valid login credentials";
+           break;
       }
     }
     return throwError(errorMessage);
