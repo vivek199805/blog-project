@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(data).subscribe((res: any) => {
         localStorage.setItem('userData', JSON.stringify(res));
         this.router.navigate(['/']);
-        this.toaster.showSuccess('Login Successfully', 'Succcess')
+        this.authService.autoLogout(res.expiresIn*1000)
+
     },
     (error) => {
       this.toaster.showError(error, 'Error')

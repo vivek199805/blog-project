@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private tokenExpirationTimer:any;
   constructor(private http: HttpClient,
     private router:Router
   ) { }
@@ -72,6 +72,10 @@ export class AuthService {
   logout(){
     localStorage.clear();
     this.router.navigate(['/']);
+    if(this.tokenExpirationTimer){
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
   }
 
   getBlogById(id:string|undefined, path:any):Observable<any>{
@@ -84,5 +88,9 @@ export class AuthService {
     return this.http.put<any>(url, payload, { params: this.getHeaders() }).pipe(retry(0), catchError(this.errorHandl));
   }
 
-
+autoLogout(expirationDuration:number){
+ this.tokenExpirationTimer = setTimeout(() => {
+   this.logout();
+  }, expirationDuration)
+}
 }
